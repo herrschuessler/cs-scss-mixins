@@ -1,0 +1,19 @@
+//////////////////////////
+// Font-face rule generator
+// ---
+// @param [string] $name: the font-family identifier
+// @param [string] $file: the file name without extension
+// @param [string] $folder: the folder below ./fonts/
+// @param [number] $weight: the font-weight
+// @param [string] $style: the font-style
+// ---
+@mixin font-face($name, $file, $folder, $weight:"400", $style:"normal") {
+  $path: "../fonts/" + $folder + "/" + $file;
+  @font-face {
+    font-family: "#{$name}";
+    src: url($path + ".woff2") format('woff2'),
+         url($path + ".woff") format('woff');
+    font-weight: $weight;
+    font-style: $style;
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "cs-scss-mixins",
+  "version": "1.0.0",
+  "description": "My common SCSS mixins",
+  "engines": {
+    "node": "6.10.0",
+    "npm": "3.10.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:herrschuessler/cs-scss-mixins.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "license": "MIT"
+}
