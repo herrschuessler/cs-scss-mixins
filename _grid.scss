@@ -1,5 +1,6 @@
 $g-gutter: 30px !default;
 $g-context: 12 !default;
+$g-prefix: 'g' !default;
 
 @mixin g-container($nested: false, $gutter: $g-gutter) {
   display: flex;
@@ -66,5 +67,73 @@ $g-context: 12 !default;
   }
   @if($rows) {
     width: calc( (100% + #{$gutter}) * #{$rows / $context} - #{$gutter} );
+  }
+}
+
+/*
+ *
+ * Build a grid system.
+ * 
+ * @param $breakpoints A sass map with min-width and max-width definitions
+ * 
+ * $breakpoints: (
+ *   s: (
+ *    min-width: null,
+ *     max-width: 767px
+ *   ),
+ *   m: (
+ *     min-width: 768px,
+ *     max-width: 979px
+ *   ),
+ *   l: (
+ *     min-width: 980px,
+ *     max-width: 1279px
+ *   ),
+ *   xl: (
+ *     min-width: 1280px,
+ *     max-width: null
+ *   )
+ * );
+ * 
+ */
+@mixin g-build-breakpoints($breakpoints, $prefix: $g-prefix){
+
+  @each $label, $map in $breakpoints {
+    $min-width: map-get($map, min-width);
+    $max-width: map-get($map, max-width);
+    $media-query: null;
+    
+    @if ($min-width and $max-width) {
+      $media-query: $min-width (max-width $max-width);
+    }
+    @elseif ($min-width){
+      $media-query: $min-width;
+    }
+    @elseif ($max-width){
+      $media-query: max-width $max-width;
+    }
+    
+    @if ($media-query) {
+      /* #{$media-query} */
+      @include breakpoint($media-query) {
+        [class^='#{$prefix}-item-#{$label}-'],
+        [class*=' #{$prefix}-item-#{$label}-'] {
+          @include g-gutters;
+        }
+        .#{$prefix}-hidden-#{$label} {
+          display: none;
+        }
+        @for $i from 1 through $g-context {
+          .#{$prefix}-item-#{$label}-#{$i} {
+            @include g-span($i, $g-context);
+          }
+        }
+        @for $i from 1 through ($g-context - 1) {
+          .#{$prefix}-push-#{$label}-#{$i} {
+            @include g-push($i);
+          }
+        }
+      }
+    }
   }
 }
