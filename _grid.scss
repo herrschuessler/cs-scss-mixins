@@ -58,7 +58,19 @@ $g-prefix: 'g' !default;
   margin-left: percentage($push / $context);
 }
 
-@mixin g-pullout($pull, $rows: false, $context: $g-context, $gutter: $g-gutter, $direction: 'left') {
+/*
+ *
+ * Pullout element within grid item
+ *
+ * @param $pull Number of grid columns to pull
+ * @param $direction left, right or both
+ * @param $rows Witdh of parent grid item ( number of columns it spans)
+ * @param $context The grid column context - how many columns has the grid?
+ * @param $gutter The width of the grid gutter
+ * 
+ */
+
+@mixin g-pullout($direction: 'left', $pull, $rows: false, $context: $g-context, $gutter: $g-gutter) {
   @if($direction == 'left' ) {
     margin-left: calc(#{percentage($pull / $context) * -1} - #{$gutter * $pull / $context});
   }
