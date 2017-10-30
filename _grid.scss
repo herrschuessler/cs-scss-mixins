@@ -64,8 +64,8 @@ $g-prefix: 'g' !default;
  *
  * @param $pull Number of grid columns to pull
  * @param $direction left, right or both
- * @param $rows Witdh of parent grid item ( number of columns it spans)
- * @param $context The grid column context - how many columns has the grid?
+ * @param $rows Explicit width (in grid columns) of pullout element 
+ * @param $context The grid column context - how wide (in grid columns) is the parent grid item?
  * @param $gutter The width of the grid gutter
  * 
  */
