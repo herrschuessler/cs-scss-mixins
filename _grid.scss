@@ -62,7 +62,11 @@ $g-prefix: 'g' !default;
   @if($direction == 'left' ) {
     margin-left: calc(#{percentage($pull / $context) * -1} - #{$gutter * $pull / $context});
   }
-  @else {
+  @elseif($direction == 'right' ) {
+    margin-right: calc(#{percentage($pull / $context) * -1} - #{$gutter * $pull / $context});
+  }
+  @elseif($direction == 'both' ) {
+    margin-left: calc(#{percentage($pull / $context) * -1} - #{$gutter * $pull / $context});
     margin-right: calc(#{percentage($pull / $context) * -1} - #{$gutter * $pull / $context});
   }
   @if($rows) {
