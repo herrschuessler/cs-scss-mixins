@@ -70,7 +70,7 @@ $g-prefix: 'g' !default;
  * 
  */
 
-@mixin g-pullout($direction: 'left', $pull, $rows: false, $context: $g-context, $gutter: $g-gutter) {
+@mixin g-pullout($direction, $pull, $rows: false, $context: $g-context, $gutter: $g-gutter) {
   @if($direction == 'left' ) {
     margin-left: calc(#{percentage($pull / $context) * -1} - #{$gutter * $pull / $context});
   }
