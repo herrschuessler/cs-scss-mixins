@@ -1,6 +1,6 @@
 {
   "name": "cs-scss-mixins",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "My common SCSS mixins",
   "engines": {
     "node": "6.10.0",
