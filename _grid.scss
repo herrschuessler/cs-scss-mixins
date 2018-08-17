@@ -9,7 +9,7 @@ $g-prefix: 'g' !default;
     flex: 0 0 100%;
   }
   @else {
-    margin: 0 (-$gutter / 2);
+    margin: 0 calc(-#{$gutter} / 2);
   }
 }
 
@@ -28,8 +28,8 @@ $g-prefix: 'g' !default;
     flex-grow: 0;
     flex-shrink: 0;
   }
-  padding-right: ($gutter / 2);
-  padding-left: ($gutter / 2);
+  padding-right: calc(#{$gutter} / 2);
+  padding-left: calc(#{$gutter} / 2);
 }
 
 @mixin g-span($rows: false, $context: $g-context) {
@@ -50,8 +50,8 @@ $g-prefix: 'g' !default;
 }
 
 @mixin g-gutters($gutter: $g-gutter) {
-  padding-right: ($gutter / 2);
-  padding-left: ($gutter / 2);
+  padding-right: calc(#{$gutter} / 2);
+  padding-left: calc(#{$gutter} / 2);
 }
 
 @mixin g-push($push, $context: $g-context) {
@@ -62,24 +62,24 @@ $g-prefix: 'g' !default;
  *
  * Pullout element within grid item
  *
- * @param $pull Number of grid columns to pull
  * @param $direction left, right or both
- * @param $rows Explicit width (in grid columns) of pullout element 
+ * @param $pull Number of grid columns to pull
+ * @param $rows Explicit width (in grid columns) of pullout element
  * @param $context The grid column context - how wide (in grid columns) is the parent grid item?
  * @param $gutter The width of the grid gutter
- * 
+ *
  */
 
 @mixin g-pullout($direction, $pull, $rows: false, $context: $g-context, $gutter: $g-gutter) {
   @if($direction == 'left' ) {
-    margin-left: calc(#{percentage($pull / $context) * -1} - #{$gutter * $pull / $context});
+    margin-left: calc(#{percentage($pull / $context) * -1} - (#{$gutter} * #{$pull / $context}));
   }
   @elseif($direction == 'right' ) {
-    margin-right: calc(#{percentage($pull / $context) * -1} - #{$gutter * $pull / $context});
+    margin-right: calc(#{percentage($pull / $context) * -1} - (#{$gutter} * #{$pull / $context}));
   }
   @elseif($direction == 'both' ) {
-    margin-left: calc(#{percentage($pull / $context) * -1} - #{$gutter * $pull / $context});
-    margin-right: calc(#{percentage($pull / $context) * -1} - #{$gutter * $pull / $context});
+    margin-left: calc(#{percentage($pull / $context) * -1} - (#{$gutter} * #{$pull / $context}));
+    margin-right: calc(#{percentage($pull / $context) * -1} - (#{$gutter} * #{$pull / $context}));
   }
   @if($rows) {
     width: calc( (100% + #{$gutter}) * #{$rows / $context} - #{$gutter} );
@@ -89,9 +89,9 @@ $g-prefix: 'g' !default;
 /*
  *
  * Build a grid system.
- * 
+ *
  * @param $breakpoints A sass map with min-width and max-width definitions
- * 
+ *
  * $breakpoints: (
  *   s: (
  *    min-width: null,
@@ -110,7 +110,7 @@ $g-prefix: 'g' !default;
  *     max-width: null
  *   )
  * );
- * 
+ *
  */
 @mixin g-build-breakpoints($breakpoints, $prefix: $g-prefix){
 
@@ -118,7 +118,7 @@ $g-prefix: 'g' !default;
     $min-width: map-get($map, min-width);
     $max-width: map-get($map, max-width);
     $media-query: null;
-    
+
     @if ($min-width and $max-width) {
       $media-query: $min-width (max-width $max-width);
     }
@@ -128,7 +128,7 @@ $g-prefix: 'g' !default;
     @elseif ($max-width){
       $media-query: max-width $max-width;
     }
-    
+
     @if ($media-query) {
       /* #{$media-query} */
       @include breakpoint($media-query) {
