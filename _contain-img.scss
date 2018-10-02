@@ -1,0 +1,13 @@
+//////////////////////////
+// Set an image as cover image
+// ---
+// @param [bool] $polyfill (true): Is the polyfill at https://github.com/bfred-it/object-fit-images included?
+@mixin contain-img($polyfill: true) {
+  display: block;
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  @if $polyfill {
+    font-family: 'object-fit: contain;'
+  }
+}
