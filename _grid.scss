@@ -5,8 +5,11 @@ $g-prefix: 'g' !default;
 @mixin g-container($nested: false, $gutter: $g-gutter) {
   display: flex;
   flex-wrap: wrap;
+  list-style: none; // Reset ul / ol browser styles
+  padding: 0; // Reset ul / ol browser styles
   @if $nested {
     flex: 0 0 100%;
+    margin: 0;
   }
   @else {
     margin: 0 calc(-#{$gutter} / 2);
