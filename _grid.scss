@@ -12,7 +12,7 @@ $g-prefix: 'g' !default;
     margin: 0;
   }
   @else {
-    margin: 0 calc(-#{$gutter} / 2);
+    margin: 0 calc(#{$gutter} / -2);
   }
 }
 
