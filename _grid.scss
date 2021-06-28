@@ -77,10 +77,10 @@ $g-prefix: 'g' !default;
   @if($direction == 'left' ) {
     margin-left: calc(#{percentage($pull / $context) * -1} - (#{$gutter} * #{$pull / $context}));
   }
-  @elseif($direction == 'right' ) {
+  @else if($direction == 'right' ) {
     margin-right: calc(#{percentage($pull / $context) * -1} - (#{$gutter} * #{$pull / $context}));
   }
-  @elseif($direction == 'both' ) {
+  @else if($direction == 'both' ) {
     margin-left: calc(#{percentage($pull / $context) * -1} - (#{$gutter} * #{$pull / $context}));
     margin-right: calc(#{percentage($pull / $context) * -1} - (#{$gutter} * #{$pull / $context}));
   }
@@ -125,10 +125,10 @@ $g-prefix: 'g' !default;
     @if ($min-width and $max-width) {
       $media-query: $min-width (max-width $max-width);
     }
-    @elseif ($min-width){
+    @else if ($min-width){
       $media-query: $min-width;
     }
-    @elseif ($max-width){
+    @else if ($max-width){
       $media-query: max-width $max-width;
     }
 
