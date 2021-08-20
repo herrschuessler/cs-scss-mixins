@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 $g-gutter: 30px !default;
 $g-context: 12 !default;
 $g-prefix: 'g' !default;
@@ -5,8 +7,8 @@ $g-prefix: 'g' !default;
 @mixin g-container($nested: false, $gutter: $g-gutter) {
   display: flex;
   flex-wrap: wrap;
-  list-style: none; // Reset ul / ol browser styles
   padding: 0; // Reset ul / ol browser styles
+  list-style: none; // Reset ul / ol browser styles
   @if $nested {
     flex: 0 0 100%;
     margin: 0;
@@ -17,10 +19,12 @@ $g-prefix: 'g' !default;
 }
 
 @mixin g-item($rows: false, $context: $g-context, $gutter: $g-gutter) {
+  padding-right: calc(#{$gutter} / 2);
+  padding-left: calc(#{$gutter} / 2);
   @if $rows {
     @if(unitless($rows)) {
-      flex: 0 0 percentage($rows / $context);
-      max-width: percentage($rows / $context);
+      flex: 0 0 percentage(math.div($rows, $context));
+      max-width: percentage(math.div($rows, $context));
     }
     @else {
       flex: 0 0 $rows;
@@ -31,15 +35,13 @@ $g-prefix: 'g' !default;
     flex-grow: 0;
     flex-shrink: 0;
   }
-  padding-right: calc(#{$gutter} / 2);
-  padding-left: calc(#{$gutter} / 2);
 }
 
 @mixin g-span($rows: false, $context: $g-context) {
   @if $rows {
     @if(unitless($rows)) {
-      flex: 0 0 percentage($rows / $context);
-      max-width: percentage($rows / $context);
+      flex: 0 0 percentage(math.div($rows, $context));
+      max-width: percentage(math.div($rows, $context));
     }
     @else {
       flex: 0 0 $rows;
@@ -58,7 +60,7 @@ $g-prefix: 'g' !default;
 }
 
 @mixin g-push($push, $context: $g-context) {
-  margin-left: percentage($push / $context);
+  margin-left: percentage(math.div($push, $context));
 }
 
 /*
@@ -75,14 +77,14 @@ $g-prefix: 'g' !default;
 
 @mixin g-pullout($direction, $pull, $rows: false, $context: $g-context, $gutter: $g-gutter) {
   @if($direction == 'left' ) {
-    margin-left: calc(#{percentage($pull / $context) * -1} - (#{$gutter} * #{$pull / $context}));
+    margin-left: calc(#{percentage(math.div($pull, $context)) * -1} - (#{$gutter} * #{$pull / $context}));
   }
   @else if($direction == 'right' ) {
-    margin-right: calc(#{percentage($pull / $context) * -1} - (#{$gutter} * #{$pull / $context}));
+    margin-right: calc(#{percentage(math.div($pull, $context)) * -1} - (#{$gutter} * #{$pull / $context}));
   }
   @else if($direction == 'both' ) {
-    margin-left: calc(#{percentage($pull / $context) * -1} - (#{$gutter} * #{$pull / $context}));
-    margin-right: calc(#{percentage($pull / $context) * -1} - (#{$gutter} * #{$pull / $context}));
+    margin-right: calc(#{percentage(math.div($pull, $context)) * -1} - (#{$gutter} * #{$pull / $context}));
+    margin-left: calc(#{percentage(math.div($pull, $context)) * -1} - (#{$gutter} * #{$pull / $context}));
   }
   @if($rows) {
     width: calc( (100% + #{$gutter}) * #{$rows / $context} - #{$gutter} );
@@ -115,8 +117,7 @@ $g-prefix: 'g' !default;
  * );
  *
  */
-@mixin g-build-breakpoints($breakpoints, $prefix: $g-prefix){
-
+@mixin g-build-breakpoints($breakpoints, $prefix: $g-prefix) {
   @each $label, $map in $breakpoints {
     $min-width: map-get($map, min-width);
     $max-width: map-get($map, max-width);
@@ -125,10 +126,10 @@ $g-prefix: 'g' !default;
     @if ($min-width and $max-width) {
       $media-query: $min-width (max-width $max-width);
     }
-    @else if ($min-width){
+    @else if ($min-width) {
       $media-query: $min-width;
     }
-    @else if ($max-width){
+    @else if ($max-width) {
       $media-query: max-width $max-width;
     }
 
