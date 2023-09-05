@@ -1,13 +1,15 @@
 //////////////////////////
 // Set an image as cover image
 // ---
-// @param [bool] $polyfill (true): Is the polyfill at https://github.com/bfred-it/object-fit-images included?
-@mixin contain-img($polyfill: true) {
+// @param [bool] $polyfill (true): Is the polyfill at https://github.com/aFarkas/lazysizes/tree/gh-pages/plugins/object-fit included?
+@mixin contain-img($polyfill: false) {
   display: block;
-  height: 100%;
   width: 100%;
+  height: 100%;
+
   object-fit: contain;
+
   @if $polyfill {
-    font-family: 'object-fit: contain;'
+    font-family: 'object-fit: contain;';
   }
 }
